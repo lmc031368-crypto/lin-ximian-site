@@ -76,7 +76,8 @@ export default function Home() {
           <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition"><Facebook /></a>
           <a href="https://x.com/cml1599897" target="_blank" rel="noopener noreferrer" className="hover:text-black transition"><Twitter /></a>
           <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition"><MessageCircle /></a>
-          <a href="mailto:Imc031368@gmail.com" className="hover:text-red-500 transition"><Mail /></a>
+          {/* 💡 如果你有新域名邮箱，可以在这里替换 Imc031368@gmail.com */}
+          <a href="mailto:contact@linximian.com" className="hover:text-red-500 transition"><Mail /></a>
         </div>
         <p className="text-gray-400 text-sm">© 2026 Lin Ximian Biotechnology Co., Ltd. 🌸</p>
       </footer>
