@@ -12,7 +12,6 @@ export default function Home() {
     { 
       title: "Repair Cream", 
       desc: "Nourishing formula.", 
-      // 💡 这里是中间的 Repair Cream 图片链接
       img: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?q=80&w=800" 
     },
     { 
@@ -33,18 +32,17 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-bold mb-4">
-            Handan Yueran Technology Company
+            Lin Ximian Biotechnology Co., Ltd.
           </motion.h1>
           <p className="text-xl opacity-90">Professional Skincare & Technology Solutions</p>
         </div>
       </section>
 
-      {/* 产品展示区 - 包含弹出效果和图片 */}
+      {/* 产品展示区 */}
       <section className="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
         {categories.map((item, i) => (
           <motion.div 
             key={i} 
-            // 💡 整体卡片弹出放大特效
             whileHover={{ 
               scale: 1.05,
               y: -10,
@@ -57,12 +55,10 @@ export default function Home() {
           >
             <div className="overflow-hidden bg-gray-100">
               <motion.img 
-                // 💡 图片本身的轻微放大效果
                 whileHover={{ scale: 1.1 }}
                 src={item.img} 
                 className="w-full h-64 object-cover" 
                 alt={item.title} 
-                // 如果图片加载失败，显示备用文字
                 onError={(e) => { e.target.src = 'https://via.placeholder.com/800x600?text=Product+Image'; }}
               />
             </div>
@@ -82,7 +78,7 @@ export default function Home() {
           <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition"><MessageCircle /></a>
           <a href="mailto:Imc031368@gmail.com" className="hover:text-red-500 transition"><Mail /></a>
         </div>
-        <p className="text-gray-400 text-sm">© 2026 Handan Yueran Technology Company 🌸</p>
+        <p className="text-gray-400 text-sm">© 2026 Lin Ximian Biotechnology Co., Ltd. 🌸</p>
       </footer>
     </main>
   );
