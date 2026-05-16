@@ -1,4 +1,4 @@
-// 1. 强制关闭 Vercel 静态缓存，确保修改瞬间全网同步
+// 1. 强行关闭 Vercel 的静态缓存，确保你的每次修改都实时全网同步
 export const revalidate = 0;
 
 export default function Home() {
@@ -14,7 +14,36 @@ export default function Home() {
       padding: 0
     }}>
       
-      {/* 2. 顶部高级大图横幅（带暗色半透明遮罩，确保白色公司名字清晰可见） */}
+      {/* 🔮 注入最安全的纯原生 CSS 动画样式：完美解决鼠标悬停“弹出来/放大”的动效，且绝对不崩 */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .product-card {
+          background-color: #ffffff;
+          border-radius: 20px;
+          padding: 24px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+          cursor: pointer;
+        }
+        .product-card:hover {
+          transform: translateY(-8px) scale(1.02); /* 鼠标放上去，卡片整体往上弹起并微微放大 */
+          box-shadow: 0 20px 35px rgba(0,0,0,0.1);  /* 阴影加深，营造高光悬浮感 */
+        }
+        .product-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-img {
+          transform: scale(1.08); /* 鼠标放上去时，里面的化妆品图片内部丝滑放大 */
+        }
+      `}} />
+
+      {/* 2. 顶部高级大图通栏（带暗色自然滤镜遮罩，确保白色公司名字清晰可见） */}
       <div style={{
         width: '100%',
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.55), rgba(15, 32, 18, 0.55)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`,
@@ -34,7 +63,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 3. 中部核心区：强制固定为【横向三栏并排】的精致化妆品卡片区 */}
+      {/* 3. 中部核心区：严格锁死、横向并排的纯净化妆品高级画廊 */}
       <main style={{
         maxWidth: '1200px',
         width: '100%',
@@ -45,20 +74,18 @@ export default function Home() {
       }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // 在宽屏上强制完美并排
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // 强制完美横向并排
           gap: '35px',
           width: '100%'
         }}>
           
-          {/* 产品 1: Sunscreen（大牌感防晒乳配图） */}
-          <div style={{ backgroundColor: '#ffffff', borderRadius: '20px', padding: '24px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          {/* 产品 1: Sunscreen（大牌感极简防晒） */}
+          <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
               <img 
                 src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" 
                 alt="Sunscreen" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease', cursor: 'pointer' }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.06)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                className="product-img"
               />
             </div>
             <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
@@ -66,15 +93,13 @@ export default function Home() {
             </span>
           </div>
 
-          {/* 产品 2: Repair Cream（干净清爽的修护面霜配图） */}
-          <div style={{ backgroundColor: '#ffffff', borderRadius: '20px', padding: '24px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          {/* 产品 2: Repair Cream（修护面霜配图） */}
+          <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
               <img 
                 src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" 
                 alt="Repair Cream" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease', cursor: 'pointer' }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.06)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                className="product-img"
               />
             </div>
             <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
@@ -82,15 +107,13 @@ export default function Home() {
             </span>
           </div>
 
-          {/* 产品 3: Whitening lotion（最稳健的极简美妆高清图链接） */}
-          <div style={{ backgroundColor: '#ffffff', borderRadius: '20px', padding: '24px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          {/* 产品 3: Whitening lotion（使用最稳健链接的高清化妆品配图，彻底终结不显示问题） */}
+          <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
               <img 
                 src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=500" 
                 alt="Whitening lotion" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease', cursor: 'pointer' }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.06)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                className="product-img"
               />
             </div>
             <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
@@ -105,13 +128,13 @@ export default function Home() {
       <footer style={{ backgroundColor: '#0f172a', color: '#9ca3af', padding: '45px 30px', borderTop: '1px solid #1e293b' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           
-          {/* 左侧版权区 */}
+          {/* 左侧页脚版权区 */}
           <div>
             <p style={{ color: '#ffffff', fontWeight: '600', margin: 0, fontSize: '1.1rem', letterSpacing: '0.5px' }}>Lin Ximian Biotechnology Co., Ltd.</p>
             <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#6b7280' }}>© 2026 All rights reserved.</p>
           </div>
 
-          {/* 右侧圆形社交联系按钮 */}
+          {/* 右侧圆形高级社交媒体按钮 */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
             <p style={{ margin: 0, fontSize: '0.75rem', fontWeight: '700', color: '#9ca3af', letterSpacing: '2px' }}>CONNECT WITH US</p>
             <div style={{ display: 'flex', gap: '15px' }}>
