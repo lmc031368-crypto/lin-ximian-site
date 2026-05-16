@@ -1,4 +1,4 @@
-// 1. 强行关闭 Vercel 的静态缓存，确保你的每次修改都实时全网同步
+// 1. 强行关闭 Vercel 静态缓存，确保你的每次修改都实时全网同步
 export const revalidate = 0;
 
 export default function Home() {
@@ -14,8 +14,9 @@ export default function Home() {
       padding: 0
     }}>
       
-      {/* 🔮 注入最安全的纯原生 CSS 动画样式：完美解决鼠标悬停“弹出来/放大”的动效，且绝对不崩 */}
+      {/* 🔮 注入生动的 CSS 动画样式：包含卡片放大和社交图标“果冻抖动”特效 */}
       <style dangerouslySetInnerHTML={{__html: `
+        /* 产品卡片放大弹出特效 */
         .product-card {
           background-color: #ffffff;
           border-radius: 20px;
@@ -29,8 +30,8 @@ export default function Home() {
           cursor: pointer;
         }
         .product-card:hover {
-          transform: translateY(-8px) scale(1.02); /* 鼠标放上去，卡片整体往上弹起并微微放大 */
-          box-shadow: 0 20px 35px rgba(0,0,0,0.1);  /* 阴影加深，营造高光悬浮感 */
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 20px 35px rgba(0,0,0,0.1);
         }
         .product-img {
           width: 100%;
@@ -39,11 +40,29 @@ export default function Home() {
           transition: transform 0.5s ease;
         }
         .product-card:hover .product-img {
-          transform: scale(1.08); /* 鼠标放上去时，里面的化妆品图片内部丝滑放大 */
+          transform: scale(1.08);
+        }
+
+        /* 🔮 生动的“果冻抖动”社交图标动画 */
+        @keyframes jelly {
+          0%, 100% { transform: scale(1, 1); }
+          25% { transform: scale(0.9, 1.1); }
+          50% { transform: scale(1.1, 0.9); }
+          75% { transform: scale(0.95, 1.05); }
+        }
+        .social-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+          animation: jelly 0.6s ease-out; /* 鼠标放上去，果冻抖动 */
+          filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); /* 增加悬浮阴影 */
         }
       `}} />
 
-      {/* 2. 顶部高级大图通栏（带暗色自然滤镜遮罩，确保白色公司名字清晰可见） */}
+      {/* 2. 顶部高级大图横幅（带暗色自然滤镜遮罩，确保白色公司名字清晰可见） */}
       <div style={{
         width: '100%',
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.55), rgba(15, 32, 18, 0.55)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`,
@@ -63,85 +82,72 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 3. 中部核心区：严格锁死、横向并排的纯净化妆品高级画廊 */}
-      <main style={{
-        maxWidth: '1200px',
-        width: '100%',
-        margin: '0 auto',
-        padding: '80px 20px',
-        boxSizing: 'border-box',
-        flexGrow: 1
-      }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // 强制完美横向并排
-          gap: '35px',
-          width: '100%'
-        }}>
+      {/* 3. 中部核心区：横向并排、纯净化妆品卡片画廊 */}
+      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '80px 20px', boxSizing: 'border-box', flexGrow: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
           
-          {/* 产品 1: Sunscreen（大牌感极简防晒） */}
+          {/* 产品 1 */}
           <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" 
-                alt="Sunscreen" 
-                className="product-img"
-              />
+              <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
-              Sunscreen
-            </span>
+            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px' }}>Sunscreen</span>
           </div>
 
-          {/* 产品 2: Repair Cream（修护面霜配图） */}
+          {/* 产品 2 */}
           <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" 
-                alt="Repair Cream" 
-                className="product-img"
-              />
+              <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" alt="Repair Cream" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
-              Repair Cream
-            </span>
+            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px' }}>Repair Cream</span>
           </div>
 
-          {/* 产品 3: Whitening lotion（使用最稳健链接的高清化妆品配图，彻底终结不显示问题） */}
+          {/* 产品 3 */}
           <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=500" 
-                alt="Whitening lotion" 
-                className="product-img"
-              />
+              <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=500" alt="Whitening lotion" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px', letterSpacing: '0.5px' }}>
-              Whitening lotion
-            </span>
+            <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px' }}>Whitening lotion</span>
           </div>
 
         </div>
       </main>
 
-      {/* 4. 底部高级黑页脚：新增完美融合的社交媒体联系方式区域 */}
+      {/* 4. 底部高级黑页脚：新增生动的、全彩色的社交媒体联系图标区域 */}
       <footer style={{ backgroundColor: '#0f172a', color: '#9ca3af', padding: '45px 30px', borderTop: '1px solid #1e293b' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           
-          {/* 左侧页脚版权区 */}
+          {/* 左侧版权区 */}
           <div>
-            <p style={{ color: '#ffffff', fontWeight: '600', margin: 0, fontSize: '1.1rem', letterSpacing: '0.5px' }}>Lin Ximian Biotechnology Co., Ltd.</p>
+            <p style={{ color: '#ffffff', fontWeight: '600', margin: 0, fontSize: '1.1rem' }}>Lin Ximian Biotechnology Co., Ltd.</p>
             <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#6b7280' }}>© 2026 All rights reserved.</p>
           </div>
 
-          {/* 右侧圆形高级社交媒体按钮 */}
+          {/* 🔮 右侧：生动的全彩色社交媒体图标（带 hover 抖动动效） */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
             <p style={{ margin: 0, fontSize: '0.75rem', fontWeight: '700', color: '#9ca3af', letterSpacing: '2px' }}>CONNECT WITH US</p>
-            <div style={{ display: 'flex', gap: '15px' }}>
-              <a href="#" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center' }}>IG</a>
-              <a href="#" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center' }}>TK</a>
-              <a href="#" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center' }}>WA</a>
-              <a href="mailto:info@linximian.com" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', textDecoration: 'none', fontSize: '1rem', justifyContent: 'center', alignItems: 'center' }}>✉</a>
+            <div style={{ display: 'flex', gap: '18px', alignItems: 'center' }}>
+              
+              {/* Instagram */}
+              <a href="#" className="social-icon" title="Instagram">
+                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '30px', height: '30px' }} />
+              </a>
+              
+              {/* TikTok */}
+              <a href="#" className="social-icon" title="TikTok">
+                <img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '30px', height: '30px' }} />
+              </a>
+              
+              {/* WhatsApp */}
+              <a href="#" className="social-icon" title="WhatsApp">
+                <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '30px', height: '30px' }} />
+              </a>
+              
+              {/* Email */}
+              <a href="mailto:info@linximian.com" className="social-icon" title="Email">
+                <img src="https://img.icons8.com/color/48/filled-message.png" alt="Email" style={{ width: '30px', height: '30px' }} />
+              </a>
+
             </div>
           </div>
 
