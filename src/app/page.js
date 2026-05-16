@@ -123,29 +123,29 @@ export default function Home() {
             <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#6b7280' }}>© 2026 All rights reserved.</p>
           </div>
 
-          {/* 🔮 右侧：生动的全彩色社交媒体图标（带 hover 抖动动效） */}
+          {/* 🔮 右侧：精准绑定链接的全彩色高颜值图标（支持新窗口打开） */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
             <p style={{ margin: 0, fontSize: '0.75rem', fontWeight: '700', color: '#9ca3af', letterSpacing: '2px' }}>CONNECT WITH US</p>
             <div style={{ display: 'flex', gap: '18px', alignItems: 'center' }}>
               
               {/* Instagram */}
-              <a href="#" className="social-icon" title="Instagram">
+              <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" className="social-icon" title="Instagram">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '30px', height: '30px' }} />
               </a>
               
+              {/* Facebook（替换了原先的 Email，使用了生动的 FB 官方图标） */}
+              <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" className="social-icon" title="Facebook">
+                <img src="https://img.icons8.com/color/48/facebook-new.png" alt="FB" style={{ width: '30px', height: '30px' }} />
+              </a>
+              
               {/* TikTok */}
-              <a href="#" className="social-icon" title="TikTok">
+              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" className="social-icon" title="TikTok">
                 <img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '30px', height: '30px' }} />
               </a>
               
-              {/* WhatsApp */}
-              <a href="#" className="social-icon" title="WhatsApp">
+              {/* WhatsApp（国际标准一键直达聊天框链接） */}
+              <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" className="social-icon" title="WhatsApp">
                 <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '30px', height: '30px' }} />
-              </a>
-              
-              {/* Email */}
-              <a href="mailto:info@linximian.com" className="social-icon" title="Email">
-                <img src="https://img.icons8.com/color/48/filled-message.png" alt="Email" style={{ width: '30px', height: '30px' }} />
               </a>
 
             </div>
