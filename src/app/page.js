@@ -1,11 +1,10 @@
-// 强行关闭 Vercel 静态缓存，确保每次在 GitHub 修改后，网页都能在几秒钟内即时更新
 export const revalidate = 0;
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-between font-sans">
       
-      {/* 1. 顶部通栏：还原你最初的绿色森林高级背景，并将站名改为 Lin Ximian Biotechnology Co., Ltd. */}
+      {/* 顶部通栏：还原绿色森林高级背景，并将站名改为新公司名 */}
       <div 
         className="w-full bg-cover bg-center py-24 px-6 text-center relative shadow-md"
         style={{ 
@@ -22,7 +21,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 2. 中部核心内容：还原产品卡片排版，并为图片注入“放大弹出来”特效 */}
+      {/* 中部核心内容：完美的护肤产品卡片排版，带有“放大弹出来”特效 */}
       <main className="max-w-6xl mx-auto px-6 py-12 w-full flex-grow">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           
@@ -71,21 +70,19 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 3. 底部区域：包含页脚版权与新增的社交媒体联系方式 */}
+      {/* 底部区域：包含页脚版权与新增的社交媒体联系方式 */}
       <footer className="bg-gray-900 text-gray-400 py-12 px-6 border-t border-gray-800">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           
-          {/* 左侧：全新版权信息 */}
-          <div className="text-center md:text-left">
+          <div>
             <p className="text-white font-medium text-base">Lin Ximian Biotechnology Co., Ltd.</p>
             <p className="text-sm text-gray-500 mt-1">© 2026 All rights reserved.</p>
           </div>
 
-          {/* 右侧：新增的社交媒体联系方式（带鼠标悬停放大弹出特效） */}
+          {/* 社交媒体联系区域 */}
           <div className="flex flex-col items-center md:items-end gap-3">
             <p className="text-sm text-gray-400 font-semibold tracking-wider">CONNECT WITH US</p>
             <div className="flex gap-4">
-              {/* 请在下面的 href='#' 里把 # 换成你真实的社交账号链接 */}
               <a href="#" className="p-2 bg-gray-800 hover:bg-pink-600 text-white rounded-full transition-all duration-300 transform hover:scale-115 hover:-translate-y-1 block" title="Instagram">
                 <span className="text-sm font-bold px-1">IG</span>
               </a>
