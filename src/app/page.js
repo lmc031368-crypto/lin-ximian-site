@@ -1,18 +1,8 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React from 'react';
 
 export default function Home() {
-  const inquirySection = useRef(null);
-
-  const scrollToInquiry = (e) => {
-    e.preventDefault(); // 阻止默认行为
-    if (inquirySection.current) {
-      inquirySection.current.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.log("未找到对应的表单锚点");
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +35,10 @@ export default function Home() {
     .product-card:hover .img-container img {
       transform: scale(1.08);
     }
+    /* 平滑滚动效果，让锚点跳转像动画一样优雅 */
+    html {
+      scroll-behavior: smooth;
+    }
   `;
 
   return (
@@ -61,20 +55,20 @@ export default function Home() {
       {/* 插入动态特效的样式标签 */}
       <style>{hoverStyles}</style>
 
-      {/* 🌲 森林大横幅（优化了层级 zIndex 确保按钮不被遮挡） */}
+      {/* 🌲 森林大横幅 */}
       <div style={{
         width: '100%',
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.45), rgba(15, 32, 18, 0.6)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`, 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '140px 20px 100px 20px', // 增加了底部留白，防止按钮贴底
+        padding: '140px 20px 100px 20px', 
         textAlign: 'center',
         boxSizing: 'border-box',
         borderBottomLeftRadius: '40px',
         borderBottomRightRadius: '40px',
         boxShadow: '0 10px 30px rgba(27, 67, 50, 0.1)',
-        position: 'relative', // 开启定位
-        zIndex: 10           // 确保在大横幅内的元素永远处于最顶层，不被下方卡片遮挡
+        position: 'relative',
+        zIndex: 10
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', color: '#ffffff' }}>
           <h1 style={{ fontSize: '3.4rem', fontWeight: '900', margin: '0 0 18px 0', letterSpacing: '1px', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
@@ -84,8 +78,9 @@ export default function Home() {
             Natural Skincare & Advanced Technology Solutions
           </p>
           
-          <button 
-            onClick={scrollToInquiry} 
+          {/* 🛠️ 终极改动：将 <button> 换成原生的 <a> 标签锚点链接，直接无视任何层级和 JS 错误，点击必跳！ */}
+          <a 
+            href="#inquiry-form-section" 
             style={{
               display: 'inline-block',
               padding: '16px 45px',
@@ -94,16 +89,16 @@ export default function Home() {
               fontWeight: '700',
               fontSize: '1.15rem',
               borderRadius: '50px',
-              border: 'none',
+              textDecoration: 'none', // 去掉下划线
               boxShadow: '0 10px 25px rgba(27, 67, 50, 0.4)',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               position: 'relative',
-              zIndex: 20 // 按钮本身层级进一步拉高
+              zIndex: 9999 // 提到绝对最高层
             }}
           >
             Inquire Now / 在线询盘 ✉ 🌲
-          </button>
+          </a>
         </div>
       </div>
 
@@ -125,10 +120,10 @@ export default function Home() {
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
           </div>
 
-          {/* 产品 2: Repair Cream */}
+          {/* 产品 2: Repair Cream（更换为了极其稳定的护肤品大图链接） */}
           <div className="product-card">
             <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
-              <img src="https://images.unsplash.com/photo-1620917670397-dc71186a20e8?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="https://images.unsplash.com/photo-1556229174-5e42a09e45af?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
           </div>
@@ -144,8 +139,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* ✉️ 独立询盘表单 */}
-      <div ref={inquirySection} style={{
+      {/* ✉️ 独立询盘表单（为其绑定了 id="inquiry-form-section" 供上面的锚点精准轰炸） */}
+      <div id="inquiry-form-section" style={{
         width: '100%',
         padding: '60px 20px',
         boxSizing: 'border-box',
