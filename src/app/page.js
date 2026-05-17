@@ -5,8 +5,13 @@ import React, { useRef } from 'react';
 export default function Home() {
   const inquirySection = useRef(null);
 
-  const scrollToInquiry = () => {
-    inquirySection.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToInquiry = (e) => {
+    e.preventDefault(); // 阻止默认行为
+    if (inquirySection.current) {
+      inquirySection.current.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log("未找到对应的表单锚点");
+    }
   };
 
   const handleSubmit = (e) => {
@@ -15,7 +20,7 @@ export default function Home() {
     e.target.reset();
   };
 
-  // 动画效果的内联 CSS 类（注入到页面中，让 inline-style 也能完美支持 hover 缩放弹出特效）
+  // 动画效果的内联 CSS 类（保持卡片放大弹出动效）
   const hoverStyles = `
     .product-card {
       background-color: #ffffff;
@@ -28,7 +33,7 @@ export default function Home() {
       box-sizing: border-box;
       width: 320px;
       cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, background-color 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
     .product-card:hover {
       transform: translateY(-10px) scale(1.04);
@@ -56,18 +61,20 @@ export default function Home() {
       {/* 插入动态特效的样式标签 */}
       <style>{hoverStyles}</style>
 
-      {/* 🌲 森林大横幅 */}
+      {/* 🌲 森林大横幅（优化了层级 zIndex 确保按钮不被遮挡） */}
       <div style={{
         width: '100%',
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.45), rgba(15, 32, 18, 0.6)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`, 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '120px 20px',
+        padding: '140px 20px 100px 20px', // 增加了底部留白，防止按钮贴底
         textAlign: 'center',
         boxSizing: 'border-box',
         borderBottomLeftRadius: '40px',
         borderBottomRightRadius: '40px',
-        boxShadow: '0 10px 30px rgba(27, 67, 50, 0.1)'
+        boxShadow: '0 10px 30px rgba(27, 67, 50, 0.1)',
+        position: 'relative', // 开启定位
+        zIndex: 10           // 确保在大横幅内的元素永远处于最顶层，不被下方卡片遮挡
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', color: '#ffffff' }}>
           <h1 style={{ fontSize: '3.4rem', fontWeight: '900', margin: '0 0 18px 0', letterSpacing: '1px', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
@@ -88,9 +95,11 @@ export default function Home() {
               fontSize: '1.15rem',
               borderRadius: '50px',
               border: 'none',
-              boxShadow: '0 10px 25px rgba(27, 67, 50, 0.3)',
+              boxShadow: '0 10px 25px rgba(27, 67, 50, 0.4)',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              position: 'relative',
+              zIndex: 20 // 按钮本身层级进一步拉高
             }}
           >
             Inquire Now / 在线询盘 ✉ 🌲
@@ -98,8 +107,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 🌿 三栏产品展示（带平滑弹出、放大动效） */}
-      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box' }}>
+      {/* 🌿 三栏产品展示 */}
+      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '60px 20px', boxSizing: 'border-box', position: 'relative', zIndex: 1 }}>
         <div style={{ 
           display: 'flex', 
           flexWrap: 'wrap', 
@@ -116,7 +125,7 @@ export default function Home() {
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
           </div>
 
-          {/* 产品 2: Repair Cream (修正了不稳定的图片链接，并确保能完美加载) */}
+          {/* 产品 2: Repair Cream */}
           <div className="product-card">
             <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
               <img src="https://images.unsplash.com/photo-1620917670397-dc71186a20e8?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
