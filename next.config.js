@@ -1,12 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 帮助搜索引擎识别你的新公司名
-  env: {
-    COMPANY_NAME: 'Lin Ximian Biotechnology Co., Ltd.',
-  },
-  images: {
-    domains: ['images.unsplash.com'], // 确保图片能正常显示
-  },
-}
+  /* 强制开启客户端、服务端组件的最严苛编译，强制刷新路由树缓存 */
+  reactStrictMode: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
