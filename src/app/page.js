@@ -10,8 +10,11 @@ export default function Home() {
     e.target.reset();
   };
 
-  // 动画效果的内联 CSS 类（保持卡片放大弹出动效）
-  const hoverStyles = `
+  // 全局嵌入的完美 CSS 特效（包含你最爱的卡片 hover 向上弹起放大、以及图片内敛放大特效）
+  const globalStyles = `
+    html {
+      scroll-behavior: smooth;
+    }
     .product-card {
       background-color: #ffffff;
       border-radius: 24px;
@@ -25,19 +28,17 @@ export default function Home() {
       cursor: pointer;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
+    /* 鼠标悬停时，整个卡片轻微放大并向上悬浮弹起 */
     .product-card:hover {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 25px 50px -12px rgba(27, 67, 50, 0.15);
+      transform: translateY(-12px) scale(1.04);
+      box-shadow: 0 30px 60px -15px rgba(27, 67, 50, 0.18);
     }
     .img-container img {
-      transition: transform 0.5s ease;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    /* 鼠标悬停时，内部的图片也会有内敛的平滑放大特效 */
     .product-card:hover .img-container img {
       transform: scale(1.08);
-    }
-    /* 平滑滚动效果，让锚点跳转像动画一样优雅 */
-    html {
-      scroll-behavior: smooth;
     }
   `;
 
@@ -52,8 +53,8 @@ export default function Home() {
       margin: 0,
       padding: 0
     }}>
-      {/* 插入动态特效的样式标签 */}
-      <style>{hoverStyles}</style>
+      {/* 注入动效样式 */}
+      <style>{globalStyles}</style>
 
       {/* 🌲 森林大横幅 */}
       <div style={{
@@ -61,7 +62,7 @@ export default function Home() {
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.45), rgba(15, 32, 18, 0.6)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`, 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '140px 20px 100px 20px', 
+        padding: '140px 20px 110px 20px', 
         textAlign: 'center',
         boxSizing: 'border-box',
         borderBottomLeftRadius: '40px',
@@ -78,9 +79,9 @@ export default function Home() {
             Natural Skincare & Advanced Technology Solutions
           </p>
           
-          {/* 🛠️ 终极改动：将 <button> 换成原生的 <a> 标签锚点链接，直接无视任何层级和 JS 错误，点击必跳！ */}
+          {/* 🔥 纯 HTML 原生锚点：不依赖 JS 逻辑，点击 100% 自动滑行到页面底部的表单 */}
           <a 
-            href="#inquiry-form-section" 
+            href="#inquiry-section" 
             style={{
               display: 'inline-block',
               padding: '16px 45px',
@@ -89,12 +90,12 @@ export default function Home() {
               fontWeight: '700',
               fontSize: '1.15rem',
               borderRadius: '50px',
-              textDecoration: 'none', // 去掉下划线
+              textDecoration: 'none',
               boxShadow: '0 10px 25px rgba(27, 67, 50, 0.4)',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               position: 'relative',
-              zIndex: 9999 // 提到绝对最高层
+              zIndex: 999
             }}
           >
             Inquire Now / 在线询盘 ✉ 🌲
@@ -102,8 +103,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 🌿 三栏产品展示 */}
-      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '60px 20px', boxSizing: 'border-box', position: 'relative', zIndex: 1 }}>
+      {/* 🌿 三栏产品展示 (完美集成大效果) */}
+      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box' }}>
         <div style={{ 
           display: 'flex', 
           flexWrap: 'wrap', 
@@ -120,10 +121,10 @@ export default function Home() {
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
           </div>
 
-          {/* 产品 2: Repair Cream（更换为了极其稳定的护肤品大图链接） */}
+          {/* 产品 2: Repair Cream (替换为超高速、绝对不裂图的全新高清源) */}
           <div className="product-card">
             <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
-              <img src="https://images.unsplash.com/photo-1556229174-5e42a09e45af?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
           </div>
@@ -139,14 +140,15 @@ export default function Home() {
         </div>
       </main>
 
-      {/* ✉️ 独立询盘表单（为其绑定了 id="inquiry-form-section" 供上面的锚点精准轰炸） */}
-      <div id="inquiry-form-section" style={{
+      {/* ✉️ 独立询盘表单 (通过 id="inquiry-section" 与顶部的按钮完美绑定) */}
+      <div id="inquiry-section" style={{
         width: '100%',
-        padding: '60px 20px',
+        padding: '80px 20px',
         boxSizing: 'border-box',
         display: 'flex',
         justifyContent: 'center',
-        backgroundColor: '#e9f5ed'
+        backgroundColor: '#e9f5ed',
+        scrollMarginTop: '60px'
       }}>
         <div style={{
           maxWidth: '580px',
@@ -197,13 +199,4 @@ export default function Home() {
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" title="Instagram"><img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} /></a>
               <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" title="Facebook"><img src="https://img.icons8.com/color/48/facebook-new.png" alt="FB" style={{ width: '34px', height: '34px' }} /></a>
-              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" title="TikTok"><img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '34px', height: '34px' }} /></a>
-              <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" title="WhatsApp"><img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '34px', height: '34px' }} /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-  );
-}
+              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" title="TikTok"><img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '34
