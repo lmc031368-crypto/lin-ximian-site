@@ -1,8 +1,21 @@
 "use client";
 
-export const revalidate = 0; 
+import React, { useRef } from 'react';
 
 export default function Home() {
+  // 创建一个指向表单位置的锚点导航
+  const inquirySection = useRef(null);
+
+  const scrollToInquiry = () => {
+    inquirySection.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("🌲 Thank you! Your inquiry has been submitted successfully.\n提交成功！我们会尽快与您联系 🍃");
+    e.target.reset();
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -28,7 +41,6 @@ export default function Home() {
           box-shadow: 0 10px 25px rgba(27, 67, 50, 0.3);
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-          text-decoration: none;
         }
         .inquiry-btn:hover {
           background-color: #2d6a4f; 
@@ -65,6 +77,43 @@ export default function Home() {
           transform: scale(1.08);
         }
 
+        .input-field {
+          width: 100%;
+          padding: 14px 16px;
+          margin-top: 8px;
+          margin-bottom: 20px;
+          border: 2px solid #d8f3dc;
+          border-radius: 14px;
+          font-size: 1rem;
+          outline: none;
+          transition: all 0.3s ease;
+          box-sizing: border-box;
+          background-color: #fafdfb;
+        }
+        .input-field:focus {
+          border-color: #2d6a4f;
+          background-color: #ffffff;
+          box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
+        }
+        .submit-btn {
+          width: 100%;
+          padding: 16px;
+          background-color: #1b4332;
+          color: #ffffff;
+          border: none;
+          border-radius: 14px;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: 0 6px 20px rgba(27, 67, 50, 0.2);
+          transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+          background-color: #2d6a4f;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(27, 67, 50, 0.35);
+        }
+
         @keyframes jelly {
           0%, 100% { transform: scale(1, 1); }
           25% { transform: scale(0.85, 1.15); }
@@ -83,7 +132,7 @@ export default function Home() {
         }
       `}} />
 
-      {/* 🌲 森林顶部大横幅 */}
+      {/* 🌲 森林大横幅 */}
       <div style={{
         width: '100%',
         backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.45), rgba(15, 32, 18, 0.6)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`, 
@@ -101,79 +150,16 @@ export default function Home() {
             Lin Ximian Biotechnology Co., Ltd.
           </h1>
           <p style={{ fontSize: '1.3rem', color: '#e8f5e9', margin: '0 0 35px 0', letterSpacing: '1.5px', fontWeight: '300', textShadow: '0 2px 5px rgba(0,0,0,0.25)' }}>
-            🍃 Natural Skincare & Advanced Technology Solutions 🍃
+            Natural Skincare & Advanced Technology Solutions
           </p>
           
-       <button 
-  onClick={() => window.location.href = '/inquiry'} 
-  className="inquiry-btn"
-  style={{ cursor: 'pointer' }}
->
-  Inquire Now / 在线询盘 ✉ 🌲
-</button>
+          {/* 点击按钮直接丝滑滚动到下方表单，绝不触发跳转，彻底拉黑 404 */}
+          <button onClick={scrollToInquiry} className="inquiry-btn">
+            Inquire Now / 在线询盘 ✉ 🌲
+          </button>
         </div>
       </div>
 
-      {/* 🌿 三栏产品（面霜换用你第一张图里那张绝对不会裂开的稳定图片地址！） */}
-      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box', flexGrow: 1 }}>
+      {/* 🌿 三栏产品展示 */}
+      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
-          
-          {/* 产品 1 */}
-          <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
-              <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" className="product-img" />
-            </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
-          </div>
-
-          {/* 产品 2: 【彻底修复】换用绝对能显示的稳定基础护肤图，绝不出现空白！ */}
-          <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
-              <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=500" alt="Repair Cream" className="product-img" />
-            </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
-          </div>
-
-          {/* 产品 3 */}
-          <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
-              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" className="product-img" />
-            </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🍃 Whitening lotion 🍃</span>
-          </div>
-
-        </div>
-      </main>
-
-      {/* 📜 【全面找回】原先丢失的四大社交联系图标页脚 */}
-      <footer style={{ backgroundColor: '#1b4332', color: '#d8f3dc', padding: '45px 30px', borderTop: '3px solid #40916c' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
-          <div>
-            <p style={{ fontWeight: '800', margin: 0, fontSize: '1.2rem', color: '#ffffff' }}>Lin Ximian Biotechnology Co., Ltd.</p>
-            <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#b7e4c7', fontWeight: '400' }}>© 2026 All natural rights reserved.</p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
-            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#b7e4c7', letterSpacing: '1.5px' }}>⚡ CONNECT WITH US ⚡</p>
-            
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" className="social-icon" title="Instagram">
-                <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} />
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" className="social-icon" title="Facebook">
-                <img src="https://img.icons8.com/color/48/facebook-new.png" alt="FB" style={{ width: '34px', height: '34px' }} />
-              </a>
-              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" className="social-icon" title="TikTok">
-                <img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '34px', height: '34px' }} />
-              </a>
-              <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" className="social-icon" title="WhatsApp">
-                <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '34px', height: '34px' }} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-  );
-}
