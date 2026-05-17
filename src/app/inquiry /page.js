@@ -1,4 +1,6 @@
-"use client"; // 锁死客户端组件
+"use client";
+
+import React from 'react';
 
 export default function InquiryPage() {
   const handleSubmit = (e) => {
@@ -11,7 +13,7 @@ export default function InquiryPage() {
     <div style={{
       minHeight: '100vh',
       backgroundColor: '#f4f7f5',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       padding: '60px 20px',
       boxSizing: 'border-box',
       display: 'flex',
@@ -20,7 +22,6 @@ export default function InquiryPage() {
       justifyContent: 'center'
     }}>
       
-      {/* 🔮 注入专门调校的森林风表单聚焦框特效 */}
       <style dangerouslySetInnerHTML={{__html: `
         .input-field {
           width: 100%;
@@ -36,7 +37,7 @@ export default function InquiryPage() {
           background-color: #fafdfb;
         }
         .input-field:focus {
-          border-color: #2d6a4f; /* 聚焦时变为质感深绿 */
+          border-color: #2d6a4f;
           background-color: #ffffff;
           box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
         }
@@ -74,7 +75,7 @@ export default function InquiryPage() {
         ← Back to Home / 返回首页
       </a>
 
-      {/* 独立询盘卡片白底大容器 */}
+      {/* 询盘表单白底容器 */}
       <div style={{
         maxWidth: '580px',
         width: '100%',
@@ -93,7 +94,6 @@ export default function InquiryPage() {
           Please fill out the form below, we will reply within 24 hours.
         </p>
 
-        {/* 交互核心表单 */}
         <form onSubmit={handleSubmit}>
           
           <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Your Name / 您的姓名 *</label>
