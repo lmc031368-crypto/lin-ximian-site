@@ -3,7 +3,6 @@
 import React, { useRef } from 'react';
 
 export default function Home() {
-  // 创建一个指向表单位置的锚点导航
   const inquirySection = useRef(null);
 
   const scrollToInquiry = () => {
@@ -23,114 +22,10 @@ export default function Home() {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       margin: 0,
       padding: 0
     }}>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        .inquiry-btn {
-          display: inline-block;
-          padding: 16px 45px;
-          background-color: #1b4332; 
-          color: #ffffff;
-          font-weight: 700;
-          font-size: 1.15rem;
-          border-radius: 50px;
-          border: none;
-          box-shadow: 0 10px 25px rgba(27, 67, 50, 0.3);
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .inquiry-btn:hover {
-          background-color: #2d6a4f; 
-          transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 15px 30px rgba(27, 67, 50, 0.5);
-        }
-
-        .product-card {
-          background-color: #ffffff;
-          border-radius: 24px;
-          padding: 24px;
-          box-shadow: 0 12px 30px rgba(27, 67, 50, 0.05);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-          cursor: pointer;
-          border: 2px solid transparent;
-          box-sizing: border-box;
-        }
-        .product-card:hover {
-          transform: translateY(-10px) scale(1.03);
-          box-shadow: 0 20px 40px rgba(27, 67, 50, 0.12);
-          border-color: #b7e4c7;
-        }
-        .product-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .product-card:hover .product-img {
-          transform: scale(1.08);
-        }
-
-        .input-field {
-          width: 100%;
-          padding: 14px 16px;
-          margin-top: 8px;
-          margin-bottom: 20px;
-          border: 2px solid #d8f3dc;
-          border-radius: 14px;
-          font-size: 1rem;
-          outline: none;
-          transition: all 0.3s ease;
-          box-sizing: border-box;
-          background-color: #fafdfb;
-        }
-        .input-field:focus {
-          border-color: #2d6a4f;
-          background-color: #ffffff;
-          box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
-        }
-        .submit-btn {
-          width: 100%;
-          padding: 16px;
-          background-color: #1b4332;
-          color: #ffffff;
-          border: none;
-          border-radius: 14px;
-          font-size: 1.1rem;
-          font-weight: 700;
-          cursor: pointer;
-          box-shadow: 0 6px 20px rgba(27, 67, 50, 0.2);
-          transition: all 0.3s ease;
-        }
-        .submit-btn:hover {
-          background-color: #2d6a4f;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(27, 67, 50, 0.35);
-        }
-
-        @keyframes jelly {
-          0%, 100% { transform: scale(1, 1); }
-          25% { transform: scale(0.85, 1.15); }
-          50% { transform: scale(1.15, 0.85); }
-          75% { transform: scale(0.95, 1.05); }
-        }
-        .social-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-        }
-        .social-icon:hover {
-          animation: jelly 0.6s ease-out;
-          filter: drop-shadow(0 6px 10px rgba(27, 67, 50, 0.3));
-        }
-      `}} />
 
       {/* 🌲 森林大横幅 */}
       <div style={{
@@ -153,8 +48,22 @@ export default function Home() {
             Natural Skincare & Advanced Technology Solutions
           </p>
           
-          {/* 点击按钮直接丝滑滚动到下方表单，绝不触发跳转，彻底拉黑 404 */}
-          <button onClick={scrollToInquiry} className="inquiry-btn">
+          <button 
+            onClick={scrollToInquiry} 
+            style={{
+              display: 'inline-block',
+              padding: '16px 45px',
+              backgroundColor: '#1b4332', 
+              color: '#ffffff',
+              fontWeight: '700',
+              fontSize: '1.15rem',
+              borderRadius: '50px',
+              border: 'none',
+              boxShadow: '0 10px 25px rgba(27, 67, 50, 0.3)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+          >
             Inquire Now / 在线询盘 ✉ 🌲
           </button>
         </div>
@@ -162,4 +71,139 @@ export default function Home() {
 
       {/* 🌿 三栏产品展示 */}
       <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: '35px', 
+          width: '100%',
+          justifyContent: 'center'
+        }}>
+          
+          {/* 产品 1 */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '24px',
+            padding: '24px',
+            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textCenter: 'center',
+            boxSizing: 'border-box',
+            width: '320px'
+          }}>
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+              <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
+          </div>
+
+          {/* 产品 2 */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '24px',
+            padding: '24px',
+            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textCenter: 'center',
+            boxSizing: 'border-box',
+            width: '320px'
+          }}>
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+              <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
+          </div>
+
+          {/* 产品 3 */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '24px',
+            padding: '24px',
+            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textCenter: 'center',
+            boxSizing: 'border-box',
+            width: '320px'
+          }}>
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🍃 Whitening lotion 🍃</span>
+          </div>
+
+        </div>
+      </main>
+
+      {/* ✉️ 独立询盘表单 */}
+      <div ref={inquirySection} style={{
+        width: '100%',
+        padding: '60px 20px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: '#e9f5ed'
+      }}>
+        <div style={{
+          maxWidth: '580px',
+          width: '100%',
+          backgroundColor: '#ffffff',
+          padding: '45px 40px',
+          borderRadius: '32px',
+          boxShadow: '0 20px 45px -10px rgba(27, 67, 50, 0.08)',
+          boxSizing: 'border-box'
+        }}>
+          <h2 style={{ fontSize: '2.1rem', fontWeight: '800', color: '#1b4332', margin: '0 0 8px 0', textAlign: 'center' }}>
+            Product Inquiry
+          </h2>
+          <p style={{ color: '#52b788', fontSize: '0.95rem', margin: '0 0 35px 0', textAlign: 'center', fontWeight: '500' }}>
+            Please fill out the form below, we will reply within 24 hours.
+          </p>
+
+          <form onSubmit={handleSubmit}>
+            <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Your Name / 您的姓名 *</label>
+            <input type="text" required style={{ width: '100%', padding: '14px 16px', marginTop: '8px', marginBottom: '20px', border: '2px solid #d8f3dc', borderRadius: '14px', fontSize: '1rem', boxSizing: 'border-box', backgroundColor: '#fafdfb' }} placeholder="e.g. John Doe" />
+
+            <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Email Address / 电子邮箱 *</label>
+            <input type="email" required style={{ width: '100%', padding: '14px 16px', marginTop: '8px', marginBottom: '20px', border: '2px solid #d8f3dc', borderRadius: '14px', fontSize: '1rem', boxSizing: 'border-box', backgroundColor: '#fafdfb' }} placeholder="name@example.com" />
+
+            <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>WhatsApp / Phone Number</label>
+            <input type="text" style={{ width: '100%', padding: '14px 16px', marginTop: '8px', marginBottom: '20px', border: '2px solid #d8f3dc', borderRadius: '14px', fontSize: '1rem', boxSizing: 'border-box', backgroundColor: '#fafdfb' }} placeholder="e.g. +86 150..." />
+
+            <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Inquiry Message / 询盘详情描述 *</label>
+            <textarea required rows="5" style={{ width: '100%', padding: '14px 16px', marginTop: '8px', marginBottom: '20px', border: '2px solid #d8f3dc', borderRadius: '14px', fontSize: '1rem', boxSizing: 'border-box', backgroundColor: '#fafdfb', resize: 'vertical' }} placeholder="Please describe the products..."></textarea>
+
+            <button type="submit" style={{ width: '100%', padding: '16px', backgroundColor: '#1b4332', color: '#ffffff', border: 'none', borderRadius: '14px', fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 6px 20px rgba(27, 67, 50, 0.2)' }}>
+              Submit Inquiry / 提交询盘 🍃
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* 📜 页脚 */}
+      <footer style={{ backgroundColor: '#1b4332', color: '#d8f3dc', padding: '45px 30px', borderTop: '3px solid #40916c' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
+          <div>
+            <p style={{ fontWeight: '800', margin: 0, fontSize: '1.2rem', color: '#ffffff' }}>Lin Ximian Biotechnology Co., Ltd.</p>
+            <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#b7e4c7', fontWeight: '400' }}>© 2026 All natural rights reserved.</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#b7e4c7', letterSpacing: '1.5px' }}>⚡ CONNECT WITH US ⚡</p>
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" title="Instagram"><img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" title="Facebook"><img src="https://img.icons8.com/color/48/facebook-new.png" alt="FB" style={{ width: '34px', height: '34px' }} /></a>
+              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" title="TikTok"><img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '34px', height: '34px' }} /></a>
+              <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" title="WhatsApp"><img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '34px', height: '34px' }} /></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
