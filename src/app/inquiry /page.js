@@ -20,6 +20,7 @@ export default function InquiryPage() {
       justifyContent: 'center'
     }}>
       
+      {/* 🔮 注入专门调校的森林风表单聚焦框特效 */}
       <style dangerouslySetInnerHTML={{__html: `
         .input-field {
           width: 100%;
@@ -35,7 +36,7 @@ export default function InquiryPage() {
           background-color: #fafdfb;
         }
         .input-field:focus {
-          border-color: #2d6a4f;
+          border-color: #2d6a4f; /* 聚焦时变为质感深绿 */
           background-color: #ffffff;
           box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
         }
@@ -73,7 +74,7 @@ export default function InquiryPage() {
         ← Back to Home / 返回首页
       </a>
 
-      {/* 询盘白底容器 */}
+      {/* 独立询盘卡片白底大容器 */}
       <div style={{
         maxWidth: '580px',
         width: '100%',
@@ -92,6 +93,7 @@ export default function InquiryPage() {
           Please fill out the form below, we will reply within 24 hours.
         </p>
 
+        {/* 交互核心表单 */}
         <form onSubmit={handleSubmit}>
           
           <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Your Name / 您的姓名 *</label>
