@@ -1,29 +1,12 @@
-"use client"; // ⚡【核心修复】锁死客户端渲染，彻底解决 Vercel 白屏崩溃报错！
+"use client"; // 锁死客户端渲染，确保动画和交互完美生效
 
-export const revalidate = 0; // 强行刷新缓存
+export const revalidate = 0; // 强行刷新缓存，让 GitHub 修改实时同步
 
 export default function Home() {
-  
-  // 丝滑滚动到下方的内嵌询盘表单，完美避开 404
-  const scrollToInquiry = (e) => {
-    e.preventDefault();
-    const section = document.getElementById('inquiry-section');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  // 模拟提交
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("✨ 🚀 Thank you! Your inquiry has been submitted successfully!\n提交成功！我们会尽快与您联系 (🎈◕‿◕🎈)");
-    e.target.reset();
-  };
-
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#fff5f7', // 超可爱的淡粉色柔和背景
+      backgroundColor: '#f4f7f5', // 森林风：极为护眼柔和的淡绿底色
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -32,34 +15,35 @@ export default function Home() {
       padding: 0
     }}>
       
-      {/* 🔮 注入全套魔法 CSS 样式：包含弹出放大、果冻抖动 */}
+      {/* 🔮 注入森林风专用的 CSS 特效池（包含弹出放大特效和果冻抖动） */}
       <style dangerouslySetInnerHTML={{__html: `
-        /* 在线询盘大按钮样式 */
+        /* 1. 顶部的在线询盘大按钮样式：采用质感森林深绿 */
         .inquiry-btn {
           display: inline-block;
           padding: 16px 45px;
-          background-color: #ffffff;
-          color: #e11d48;
+          background-color: #1b4332; /* 深邃森林绿 */
+          color: #ffffff;
           font-weight: 700;
           font-size: 1.15rem;
           border-radius: 50px;
           border: none;
-          box-shadow: 0 10px 25px rgba(244, 63, 94, 0.3);
+          box-shadow: 0 10px 25px rgba(27, 67, 50, 0.3);
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           text-decoration: none;
         }
         .inquiry-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 15px 30px rgba(244, 63, 94, 0.5);
+          background-color: #2d6a4f; /* 悬浮变成明亮一点的绿 */
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 15px 30px rgba(27, 67, 50, 0.5);
         }
 
-        /* 产品卡片悬浮弹出放大特效 */
+        /* 2. 产品卡片悬浮“弹出来”放大特效 */
         .product-card {
           background-color: #ffffff;
           border-radius: 24px;
           padding: 24px;
-          box-shadow: 0 12px 30px rgba(219, 39, 119, 0.06);
+          box-shadow: 0 12px 30px rgba(27, 67, 50, 0.05);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -70,21 +54,21 @@ export default function Home() {
           box-sizing: border-box;
         }
         .product-card:hover {
-          transform: translateY(-10px) scale(1.03); /* 弹出来放大特效 */
-          box-shadow: 0 20px 40px rgba(219, 39, 119, 0.12);
-          border-color: #fbcfe8;
+          transform: translateY(-10px) scale(1.03); /* 弹出来放大效果 */
+          box-shadow: 0 20px 40px rgba(27, 67, 50, 0.12);
+          border-color: #b7e4c7; /* 悬浮时显现浅绿边框 */
         }
         .product-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.6s ease;
+          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .product-card:hover .product-img {
-          transform: scale(1.1); /* 图片内部二次微放大 */
+          transform: scale(1.08); /* 图片内部二次温和放大 */
         }
 
-        /* 社交媒体图标果冻Q弹抖动 */
+        /* 3. 页脚社交媒体图标果冻Q弹抖动特效 */
         @keyframes jelly {
           0%, 100% { transform: scale(1, 1); }
           25% { transform: scale(0.85, 1.15); }
@@ -99,34 +83,14 @@ export default function Home() {
         }
         .social-icon:hover {
           animation: jelly 0.6s ease-out;
-          filter: drop-shadow(0 6px 10px rgba(219, 39, 119, 0.3));
-        }
-
-        /* 输入框样式 */
-        .input-field {
-          width: 100%;
-          padding: 14px 16px;
-          margin-top: 8px;
-          margin-bottom: 20px;
-          border: 2px solid #fbcfe8;
-          border-radius: 16px;
-          font-size: 1rem;
-          outline: none;
-          transition: all 0.3s ease;
-          box-sizing: border-box;
-          background-color: #fff9fa;
-        }
-        .input-field:focus {
-          border-color: #db2777;
-          background-color: #ffffff;
-          box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.1);
+          filter: drop-shadow(0 6px 10px rgba(27, 67, 50, 0.3));
         }
       `}} />
 
-      {/* 🎀 顶部梦幻粉嫩横幅 */}
+      {/* 🌲 顶部梦幻森林大横幅 */}
       <div style={{
         width: '100%',
-        backgroundImage: `linear-gradient(rgba(244, 63, 94, 0.35), rgba(244, 63, 94, 0.5)), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=1200')`,
+        backgroundImage: `linear-gradient(rgba(15, 32, 18, 0.45), rgba(15, 32, 18, 0.6)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1200')`, // 极具生命力的清晨森林大图
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '120px 20px',
@@ -134,116 +98,66 @@ export default function Home() {
         boxSizing: 'border-box',
         borderBottomLeftRadius: '40px',
         borderBottomRightRadius: '40px',
-        boxShadow: '0 10px 30px rgba(244, 63, 94, 0.1)'
+        boxShadow: '0 10px 30px rgba(27, 67, 50, 0.1)'
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', color: '#ffffff' }}>
-          <h1 style={{ fontSize: '3.4rem', fontWeight: '900', margin: '0 0 18px 0', letterSpacing: '1px', textShadow: '0 4px 10px rgba(0,0,0,0.25)' }}>
+          <h1 style={{ fontSize: '3.4rem', fontWeight: '900', margin: '0 0 18px 0', letterSpacing: '1px', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
             Lin Ximian Biotechnology Co., Ltd.
           </h1>
-          <p style={{ fontSize: '1.3rem', color: '#fff1f2', margin: '0 0 32px 0', letterSpacing: '1.5px', fontWeight: '400', textShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>
-            ✨ Pure Skincare & Cute Technology Solutions ✨
+          <p style={{ fontSize: '1.3rem', color: '#e8f5e9', margin: '0 0 35px 0', letterSpacing: '1.5px', fontWeight: '300', textShadow: '0 2px 5px rgba(0,0,0,0.25)' }}>
+            🍃 Natural Skincare & Advanced Technology Solutions 🍃
           </p>
           
-          {/* 在线询盘按钮：完美安全下滑 */}
-          <button onClick={scrollToInquiry} className="inquiry-btn">
-            Inquire Now / 在线询盘 ✉ 💕
-          </button>
+          {/* 跳转按钮指向独立的 /inquiry 子网页页面 */}
+          <a href="/inquiry" className="inquiry-btn">
+            Inquire Now / 在线询盘 ✉ 🌲
+          </a>
         </div>
       </div>
 
-      {/* 🌸 中部产品展示墙（包含稳健、绝不裂开的中间图片！） */}
-      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '60px 20px', boxSizing: 'border-box' }}>
+      {/* 🌿 中部三栏产品展示墙（全部更换为清新大气的护肤实物高清大图） */}
+      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box', flexGrow: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
           
           {/* 产品 1: Sunscreen */}
           <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
               <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#be185d', marginTop: '24px' }}>🌸 Sunscreen 🌸</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
           </div>
 
-          {/* 产品 2: Repair Cream（中间图片完美展现，稳定可靠） */}
+          {/* 产品 2: Repair Cream */}
           <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
-              <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" alt="Repair Cream" className="product-img" />
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
+              <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=500" alt="Repair Cream" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#be185d', marginTop: '24px' }}>🎀 Repair Cream 🎀</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
           </div>
 
           {/* 产品 3: Whitening lotion */}
           <div className="product-card">
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
+            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#e8f5e9' }}>
               <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" className="product-img" />
             </div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#be185d', marginTop: '24px' }}>🌟 Whitening lotion 🌟</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🍃 Whitening lotion 🍃</span>
           </div>
 
         </div>
       </main>
 
-      {/* 💌 内嵌询盘区（直接嵌在主页，点顶部直达，安全防 404） */}
-      <section id="inquiry-section" style={{
-        maxWidth: '600px',
-        width: '90%',
-        margin: '40px auto 80px auto',
-        backgroundColor: '#ffffff',
-        padding: '45px 35px',
-        borderRadius: '32px',
-        boxShadow: '0 20px 50px rgba(219, 39, 119, 0.08)',
-        boxSizing: 'border-box',
-        border: '3px solid #fce7f3'
-      }}>
-        <h2 style={{ fontSize: '2.1rem', fontWeight: '900', color: '#9d174d', margin: '0 0 8px 0', textAlign: 'center' }}>
-          💌 Leave a Message 💌
-        </h2>
-        <p style={{ color: '#f43f5e', fontSize: '0.95rem', margin: '0 0 35px 0', textAlign: 'center', fontWeight: '500' }}>
-          Tell us your requirements, we will reply within 24 hours!
-        </p>
-
-        <form onSubmit={handleSubmit}>
-          <label style={{ fontWeight: '700', color: '#4c0519' }}>Your Name / 您的姓名 *</label>
-          <input type="text" required className="input-field" placeholder="🧸 e.g. John Doe" />
-
-          <label style={{ fontWeight: '700', color: '#4c0519' }}>Email Address / 电子邮箱 *</label>
-          <input type="email" required className="input-field" placeholder="✉ name@example.com" />
-
-          <label style={{ fontWeight: '700', color: '#4c0519' }}>WhatsApp / Phone Number</label>
-          <input type="text" className="input-field" placeholder="📱 e.g. +86 150..." />
-
-          <label style={{ fontWeight: '700', color: '#4c0519' }}>Inquiry Message / 询盘详情描述 *</label>
-          <textarea required className="input-field" rows="4" placeholder="🦄 Describe what products you are looking for..." style={{ resize: 'vertical' }}></textarea>
-
-          <button type="submit" style={{
-            width: '100%',
-            padding: '16px',
-            backgroundColor: '#ff4e72',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: '16px',
-            fontSize: '1.15rem',
-            fontWeight: '700',
-            cursor: 'pointer',
-            boxShadow: '0 6px 20px rgba(255, 78, 114, 0.3)',
-            transition: 'all 0.2s'
-          }}>
-            🎈 Submit Inquiry / 提交询盘 🎈
-          </button>
-        </form>
-      </section>
-
-      {/* 💝 炫彩果冻抖动特效社交媒体页脚 */}
-      <footer style={{ backgroundColor: '#fff0f3', color: '#9d174d', padding: '45px 30px', borderTop: '3px solid #fce7f3' }}>
+      {/* 📜 高级森林深绿页脚 */}
+      <footer style={{ backgroundColor: '#1b4332', color: '#d8f3dc', padding: '45px 30px', borderTop: '3px solid #40916c' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <div>
-            <p style={{ fontWeight: '800', margin: 0, fontSize: '1.2rem', color: '#9d174d' }}>Lin Ximian Biotechnology Co., Ltd.</p>
-            <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#fda4af', fontWeight: '500' }}>© 2026 All lovely rights reserved.</p>
+            <p style={{ fontWeight: '800', margin: 0, fontSize: '1.2rem', color: '#ffffff' }}>Lin Ximian Biotechnology Co., Ltd.</p>
+            <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#b7e4c7', fontWeight: '400' }}>© 2026 All natural rights reserved.</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
-            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#f43f5e', letterSpacing: '1.5px' }}>✨ CONNECT WITH US ✨</p>
+            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#b7e4c7', letterSpacing: '1.5px' }}>⚡ CONNECT WITH US ⚡</p>
             
-            {/* 社交媒体高清彩色图标大回归！每一个都带果冻特效 */}
+            {/* 社交媒体入口大集合：带有Q弹抖动特效 */}
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" className="social-icon" title="Instagram">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} />
