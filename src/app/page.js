@@ -1,3 +1,4 @@
+// 强行关闭 Vercel 静态缓存，确保你的每次代码修改都实时全网同步更新
 export const revalidate = 0;
 
 export default function Home() {
@@ -58,11 +59,10 @@ export default function Home() {
           filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
         }
 
-        /* 🔮 询盘按钮的高级悬浮特效 */
         .inquiry-btn {
           display: inline-block;
           margin-top: 28px;
-          padding: 14px 36px;
+          padding: 14px 40px;
           background-color: #db2777;
           color: #ffffff;
           text-decoration: none;
@@ -74,8 +74,8 @@ export default function Home() {
         }
         .inquiry-btn:hover {
           background-color: #be185d;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(219, 39, 119, 0.6);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(219, 39, 119, 0.6);
         }
       `}} />
 
@@ -97,14 +97,14 @@ export default function Home() {
             Professional Skincare & Technology Solutions
           </p>
           
-          {/* 🌟 新增：直达询盘页面的高级按钮 */}
-          <a href="/inquiry" className="inquiry-btn">
+          {/* 🌟 这里的路径换成全新的小写 /contact */}
+          <a href="/contact" className="inquiry-btn">
             Inquire Now / 在线询盘 ✉
           </a>
         </div>
       </div>
 
-      {/* 中部核心区 */}
+      {/* 中部核心区：护肤品卡画廊 */}
       <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '80px 20px', boxSizing: 'border-box', flexGrow: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
           
@@ -119,7 +119,7 @@ export default function Home() {
           {/* 产品 2 */}
           <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
-              <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" alt="Repair Cream" className="product-img" />
+              <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=500" alt="Repair Cream" className="product-img" />
             </div>
             <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px' }}>Repair Cream</span>
           </div>
@@ -127,7 +127,7 @@ export default function Home() {
           {/* 产品 3 */}
           <div className="product-card">
             <div style={{ width: '100%', height: '300px', overflow: 'hidden', borderRadius: '14px', backgroundColor: '#f3f4f6' }}>
-              <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=500" alt="Whitening lotion" className="product-img" />
+              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" className="product-img" />
             </div>
             <span style={{ fontSize: '1.2rem', fontWeight: '600', color: '#db2777', marginTop: '24px' }}>Whitening lotion</span>
           </div>
