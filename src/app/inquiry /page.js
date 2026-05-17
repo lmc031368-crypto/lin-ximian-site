@@ -1,16 +1,16 @@
-"use client"; // 锁死客户端交互组件，完美解决编译报错白屏问题
+"use client";
 
 export default function InquiryPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("🌲 Thank you! Your inquiry has been submitted successfully.\n提交成功！我们会尽快与您联系 🍃");
-    e.target.reset(); // 提交成功后自动清空表单
+    e.target.reset();
   };
 
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#f4f7f5', // 森林绿淡雅温润背景底色
+      backgroundColor: '#f4f7f5',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       padding: '60px 20px',
       boxSizing: 'border-box',
@@ -20,7 +20,6 @@ export default function InquiryPage() {
       justifyContent: 'center'
     }}>
       
-      {/* 🔮 注入专门调校的森林风表单微动效、聚焦框特效 */}
       <style dangerouslySetInnerHTML={{__html: `
         .input-field {
           width: 100%;
@@ -36,14 +35,14 @@ export default function InquiryPage() {
           background-color: #fafdfb;
         }
         .input-field:focus {
-          border-color: #2d6a4f; /* 聚焦时变为高雅林木绿 */
+          border-color: #2d6a4f;
           background-color: #ffffff;
           box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
         }
         .submit-btn {
           width: 100%;
           padding: 16px;
-          background-color: #1b4332; /* 沉稳深绿 */
+          background-color: #1b4332;
           color: #ffffff;
           border: none;
           border-radius: 14px;
@@ -60,7 +59,6 @@ export default function InquiryPage() {
         }
       `}} />
 
-      {/* 返回首页链接导航 */}
       <a href="/" style={{ 
         textDecoration: 'none', 
         color: '#52b788', 
@@ -69,16 +67,11 @@ export default function InquiryPage() {
         marginBottom: '28px', 
         display: 'flex', 
         alignItems: 'center', 
-        gap: '6px',
-        transition: 'color 0.2s'
-      }}
-      onMouseEnter={(e) => e.target.style.color = '#1b4332'}
-      onMouseLeave={(e) => e.target.style.color = '#52b788'}
-      >
+        gap: '6px'
+      }}>
         ← Back to Home / 返回首页
       </a>
 
-      {/* 独立询盘卡片白底大容器 */}
       <div style={{
         maxWidth: '580px',
         width: '100%',
@@ -97,7 +90,6 @@ export default function InquiryPage() {
           Please fill out the form below, we will reply within 24 hours.
         </p>
 
-        {/* 交互核心表单 */}
         <form onSubmit={handleSubmit}>
           
           <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Your Name / 您的姓名 *</label>
