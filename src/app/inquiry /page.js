@@ -1,4 +1,4 @@
-"use client";
+"use client"; // 锁死客户端组件
 
 export default function InquiryPage() {
   const handleSubmit = (e) => {
@@ -59,6 +59,7 @@ export default function InquiryPage() {
         }
       `}} />
 
+      {/* 返回首页导航 */}
       <a href="/" style={{ 
         textDecoration: 'none', 
         color: '#52b788', 
@@ -72,6 +73,7 @@ export default function InquiryPage() {
         ← Back to Home / 返回首页
       </a>
 
+      {/* 询盘白底容器 */}
       <div style={{
         maxWidth: '580px',
         width: '100%',
