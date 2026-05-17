@@ -15,6 +15,33 @@ export default function Home() {
     e.target.reset();
   };
 
+  // 动画效果的内联 CSS 类（注入到页面中，让 inline-style 也能完美支持 hover 缩放弹出特效）
+  const hoverStyles = `
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(27, 67, 50, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      width: 320px;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, background-color 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 25px 50px -12px rgba(27, 67, 50, 0.15);
+    }
+    .img-container img {
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .img-container img {
+      transform: scale(1.08);
+    }
+  `;
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -26,6 +53,8 @@ export default function Home() {
       margin: 0,
       padding: 0
     }}>
+      {/* 插入动态特效的样式标签 */}
+      <style>{hoverStyles}</style>
 
       {/* 🌲 森林大横幅 */}
       <div style={{
@@ -69,7 +98,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 🌿 三栏产品展示 */}
+      {/* 🌿 三栏产品展示（带平滑弹出、放大动效） */}
       <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '70px 20px', boxSizing: 'border-box' }}>
         <div style={{ 
           display: 'flex', 
@@ -79,58 +108,25 @@ export default function Home() {
           justifyContent: 'center'
         }}>
           
-          {/* 产品 1 */}
-          <div style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '24px',
-            padding: '24px',
-            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textCenter: 'center',
-            boxSizing: 'border-box',
-            width: '320px'
-          }}>
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+          {/* 产品 1: Sunscreen */}
+          <div className="product-card">
+            <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
               <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🌿 Sunscreen 🌿</span>
           </div>
 
-          {/* 产品 2 */}
-          <div style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '24px',
-            padding: '24px',
-            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textCenter: 'center',
-            boxSizing: 'border-box',
-            width: '320px'
-          }}>
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
-              <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {/* 产品 2: Repair Cream (修正了不稳定的图片链接，并确保能完美加载) */}
+          <div className="product-card">
+            <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+              <img src="https://images.unsplash.com/photo-1620917670397-dc71186a20e8?q=80&w=500" alt="Repair Cream" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>✨ Repair Cream ✨</span>
           </div>
 
-          {/* 产品 3 */}
-          <div style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '24px',
-            padding: '24px',
-            boxShadow: '0 12px 30px rgba(27, 67, 50, 0.05)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textCenter: 'center',
-            boxSizing: 'border-box',
-            width: '320px'
-          }}>
-            <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
+          {/* 产品 3: Whitening lotion */}
+          <div className="product-card">
+            <div className="img-container" style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px' }}>
               <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#1b4332', marginTop: '24px' }}>🍃 Whitening lotion 🍃</span>
@@ -177,33 +173,4 @@ export default function Home() {
             <label style={{ fontWeight: '700', color: '#1b4332', fontSize: '0.95rem' }}>Inquiry Message / 询盘详情描述 *</label>
             <textarea required rows="5" style={{ width: '100%', padding: '14px 16px', marginTop: '8px', marginBottom: '20px', border: '2px solid #d8f3dc', borderRadius: '14px', fontSize: '1rem', boxSizing: 'border-box', backgroundColor: '#fafdfb', resize: 'vertical' }} placeholder="Please describe the products..."></textarea>
 
-            <button type="submit" style={{ width: '100%', padding: '16px', backgroundColor: '#1b4332', color: '#ffffff', border: 'none', borderRadius: '14px', fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 6px 20px rgba(27, 67, 50, 0.2)' }}>
-              Submit Inquiry / 提交询盘 🍃
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* 📜 页脚 */}
-      <footer style={{ backgroundColor: '#1b4332', color: '#d8f3dc', padding: '45px 30px', borderTop: '3px solid #40916c' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
-          <div>
-            <p style={{ fontWeight: '800', margin: 0, fontSize: '1.2rem', color: '#ffffff' }}>Lin Ximian Biotechnology Co., Ltd.</p>
-            <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: '#b7e4c7', fontWeight: '400' }}>© 2026 All natural rights reserved.</p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
-            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#b7e4c7', letterSpacing: '1.5px' }}>⚡ CONNECT WITH US ⚡</p>
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" title="Instagram"><img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} /></a>
-              <a href="https://www.facebook.com/profile.php?id=61567982517175" target="_blank" rel="noopener noreferrer" title="Facebook"><img src="https://img.icons8.com/color/48/facebook-new.png" alt="FB" style={{ width: '34px', height: '34px' }} /></a>
-              <a href="https://www.tiktok.com/@cathyll3_" target="_blank" rel="noopener noreferrer" title="TikTok"><img src="https://img.icons8.com/color/48/tiktok.png" alt="TK" style={{ width: '34px', height: '34px' }} /></a>
-              <a href="https://wa.me/8615075550800" target="_blank" rel="noopener noreferrer" title="WhatsApp"><img src="https://img.icons8.com/color/48/whatsapp.png" alt="WA" style={{ width: '34px', height: '34px' }} /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-  );
-}
+            <button type="submit" style={{ width: '100%', padding: '16px', backgroundColor: '#1b4332', color: '#ffffff', border: 'none', borderRadius: '14px', fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 6px 2
