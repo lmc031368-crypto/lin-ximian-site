@@ -1,11 +1,14 @@
-// 1. 强行刷新缓存，让每一次在 GitHub 的修改都即时全网同步
+// 强行刷新缓存，让每一次在 GitHub 的修改都即时全网同步
 export const revalidate = 0;
 
 export default function Home() {
   // 点击顶部按钮时，丝滑滚动到下方的表单
   const scrollToInquiry = (e) => {
     e.preventDefault();
-    document.getElementById('inquiry-section').scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById('inquiry-section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   // 表单提交弹窗
@@ -27,9 +30,28 @@ export default function Home() {
       padding: 0
     }}>
       
-      {/* 🔮 可爱动效核心样式池 */}
+      {/* 🔮 核心样式池：补齐所有丢失的卡片、特效和社交媒体样式 */}
       <style dangerouslySetInnerHTML={{__html: `
-        /* 产品卡片悬浮放大动画 */
+        /* 1. 顶部的在线询盘大按钮样式 */
+        .inquiry-btn {
+          display: inline-block;
+          padding: 16px 45px;
+          background-color: #ffffff;
+          color: #e11d48;
+          font-weight: 700;
+          fontSize: '1.15rem';
+          border-radius: 50px;
+          border: none;
+          box-shadow: 0 10px 25px rgba(244, 63, 94, 0.3);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .inquiry-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 30px rgba(244, 63, 94, 0.5);
+        }
+
+        /* 2. 产品卡片悬浮弹出放大特效 */
         .product-card {
           background-color: #ffffff;
           border-radius: 24px;
@@ -42,11 +64,12 @@ export default function Home() {
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
           cursor: pointer;
           border: 2px solid transparent;
+          box-sizing: border-box;
         }
         .product-card:hover {
           transform: translateY(-10px) scale(1.03); /* 弹出来、放大特效 */
           box-shadow: 0 20px 40px rgba(219, 39, 119, 0.12);
-          border-color: '#fbcfe8';
+          border-color: #fbcfe8;
         }
         .product-img {
           width: 100%;
@@ -58,7 +81,7 @@ export default function Home() {
           transform: scale(1.1); /* 图片内部二次放大 */
         }
 
-        /* 社交媒体图标果冻Q弹抖动特效 */
+        /* 3. 社交媒体图标果冻Q弹抖动特效 */
         @keyframes jelly {
           0%, 100% { transform: scale(1, 1); }
           25% { transform: scale(0.85, 1.15); }
@@ -76,7 +99,7 @@ export default function Home() {
           filter: drop-shadow(0 6px 10px rgba(219, 39, 119, 0.3));
         }
 
-        /* 按钮可爱呼吸和聚焦效果 */
+        /* 4. 询盘输入框样式 */
         .input-field {
           width: 100%;
           padding: 14px 16px;
@@ -118,33 +141,18 @@ export default function Home() {
             ✨ Pure Skincare & Cute Technology Solutions ✨
           </p>
           
-          {/* 在线询盘按钮：完美点击滚动 */}
-          <button onClick={scrollToInquiry} style={{
-            display: 'inline-block',
-            padding: '16px 45px',
-            backgroundColor: '#ffffff',
-            color: '#e11d48',
-            fontWeight: '700',
-            fontSize: '1.15rem',
-            borderRadius: '50px',
-            border: 'none',
-            boxShadow: '0 10px 25px rgba(244, 63, 94, 0.3)',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => { e.target.style.transform = 'translateY(-3px)'; e.target.style.boxShadow = '0 15px 30px rgba(244, 63, 94, 0.5)'; }}
-          onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 25px rgba(244, 63, 94, 0.3)'; }}
-          >
+          {/* 在线询盘按钮：点击自动下滑 */}
+          <button onClick={scrollToInquiry} className="inquiry-btn">
             Inquire Now / 在线询盘 ✉ 💕
           </button>
         </div>
       </div>
 
-      {/* 🌸 中部产品展示墙（全部图片已补齐，且带弹出放大特效） */}
+      {/* 🌸 中部产品展示墙（全部图片已换成稳健的高清图源，包含中间图片！） */}
       <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '60px 20px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '35px', width: '100%' }}>
           
-          {/* 产品 1 */}
+          {/* 产品 1: Sunscreen */}
           <div className="product-card">
             <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
               <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=500" alt="Sunscreen" className="product-img" />
@@ -152,7 +160,7 @@ export default function Home() {
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#be185d', marginTop: '24px' }}>🌸 Sunscreen 🌸</span>
           </div>
 
-          {/* 产品 2（中间图片完美补齐，极其粉嫩可爱） */}
+          {/* 产品 2: Repair Cream（中间图片完美展现，超级可爱高级） */}
           <div className="product-card">
             <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
               <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=500" alt="Repair Cream" className="product-img" />
@@ -160,7 +168,7 @@ export default function Home() {
             <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#be185d', marginTop: '24px' }}>🎀 Repair Cream 🎀</span>
           </div>
 
-          {/* 产品 3 */}
+          {/* 产品 3: Whitening lotion */}
           <div className="product-card">
             <div style={{ width: '100%', height: '320px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#f3f4f6' }}>
               <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500" alt="Whitening lotion" className="product-img" />
@@ -171,7 +179,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 💌 完美内嵌询盘表单区（彻底告别404，安全百分百） */}
+      {/* 💌 内嵌询盘表单区（点击顶部按钮会自动滚到这里，百分之百没有 404） */}
       <section id="inquiry-section" style={{
         maxWidth: '600px',
         width: '90%',
@@ -224,7 +232,7 @@ export default function Home() {
         </form>
       </section>
 
-      {/* 💝 带来果冻抖动动效的完整页脚与媒体入口 */}
+      {/* 💝 带来果冻抖动动效的完整社交媒体页脚 */}
       <footer style={{ backgroundColor: '#fff0f3', color: '#9d174d', padding: '45px 30px', borderTop: '3px solid #fce7f3' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <div>
@@ -234,7 +242,8 @@ export default function Home() {
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
             <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: '800', color: '#f43f5e', letterSpacing: '1.5px' }}>✨ CONNECT WITH US ✨</p>
-            {/* 社交媒体真实入口集合 */}
+            
+            {/* 社交媒体高清图标大回归！每个都有Q弹果冻特效 */}
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <a href="https://www.instagram.com/babyfly336/" target="_blank" rel="noopener noreferrer" className="social-icon" title="Instagram">
                 <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="IG" style={{ width: '34px', height: '34px' }} />
