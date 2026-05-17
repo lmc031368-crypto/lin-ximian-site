@@ -104,9 +104,13 @@ export default function Home() {
             🍃 Natural Skincare & Advanced Technology Solutions 🍃
           </p>
           
-          <a href="/inquiry" className="inquiry-btn">
-            Inquire Now / 在线询盘 ✉ 🌲
-          </a>
+       <button 
+  onClick={() => window.location.href = '/inquiry'} 
+  className="inquiry-btn"
+  style={{ cursor: 'pointer' }}
+>
+  Inquire Now / 在线询盘 ✉ 🌲
+</button>
         </div>
       </div>
 
